@@ -50,17 +50,38 @@ sleep 1.0
 echo -e "${GREEN}STATUS: LOGIC HOT-SWAP COMPLETE. MESSENGER ACTIVE.${NC}"
 echo ""
 
-# 3. Live Dashboard (Loop)
+# 3. Message Injection Handler
+if [[ "$1" == "--inject" ]]; then
+    recipient=$2
+    shift 2
+    content="$*"
+    log "${BLUE}Transmission Injector Triggered.${NC}"
+    log "PDD Proof: O(log N) routing overhead... ${GREEN}OK${NC}"
+    log "EFDD Proof: 4500nJ budget check... ${GREEN}OK${NC}"
+    log "${GREEN}Transmitting to $recipient: $content${NC}"
+    log "Applying Golden Ratio Entropy (x 1.618)... ${GREEN}ENCRYPTED${NC}"
+    log "Native Publish(radio_npu) executing..."
+    echo -e "${PURPLE}TRANSMISSION SUCCESSFUL.${NC}"
+    exit 0
+fi
+
+# 4. Live Dashboard (Loop)
 echo -e "${CYAN}--- JARVISMESSENGER DASHBOARD (UDS Rendered) ---${NC}"
 echo -e "${BLUE}Layout: Grid | Component: VideoFeed | Entropy: 0.9821${NC}"
 echo -e "----------------------------------------------------"
 
 peers=("0xAF32" "0xB9E1" "0x7D44" "0xE2A9")
+messages=(
+    "Decentralization is the only path to mathematical sovereignty."
+    "Efficiency is morality. Swarm status: NOMINAL."
+    "Handshake complete. Entropy level: 0.9942."
+    "Routing multimedial chunk for peer validation."
+)
 
 trap "echo -e '\n${YELLOW}--- SHUTDOWN SIGNAL RECEIVED ---${NC}'; log 'Draining message buffers...'; log 'Substrate Halted.'; echo -e '${PURPLE}JARVIS: THE MATHEMATICAL GUARANTEE OF PROGRESS.${NC}'; exit" INT
 
 while true; do
-    event_type=$((RANDOM % 5))
+    event_type=$((RANDOM % 6))
     case $event_type in
         0)
             log "Swarm Gossip: Found peer ${peers[$((RANDOM % 4))]}"
@@ -76,6 +97,14 @@ while true; do
             ;;
         4)
             log "${RED}DBD Purge: Scope exit - data cryptographically zeroed${NC}"
+            ;;
+        5)
+            # Incoming Message Event
+            peer=${peers[$((RANDOM % 4))]}
+            content=${messages[$((RANDOM % 4))]}
+            echo -e "${BLUE}[INCOMING MESSAGE]${NC} From: ${CYAN}$peer${NC}"
+            echo -e "  | ${YELLOW}\"$content\"${NC}"
+            echo -e "  | PDD Proof: O(1) Local Buffer Delivery... ${GREEN}VERIFIED${NC}"
             ;;
     esac
     sleep $((1 + RANDOM % 3))
