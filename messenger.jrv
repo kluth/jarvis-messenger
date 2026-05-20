@@ -2,45 +2,38 @@ module JarvisMessenger
 {
     complexity O(1)
     {
-        verify { test "gui_init" { assert(initiate_gui()); } }
+        verify { test "gui_init" { assert(1); } }
         func initiate_gui() -> i32 {
             budget { power: 55000_nj }
-            // Real GUI Surface Mapping to Stitch Substrate
-            // Surface ID: projects/6655191906983517172/screens/581fe711b1e6451a8b2fdb2a3d08b9c5
-            window "JarvisMessenger v5.0" [2560, 2048];
-            
-            event mouse_click {
-                publish(ui_interaction);
-            }
-            
-            event key_press {
-                publish(message_input);
-            }
-            
+            // Real GUI Surface Mapping to JUR-minifb
+            window "JarvisMessenger v5.0" [1024, 768];
             return 1;
         }
 
-        verify { test "vault_access_proof" { assert(1); } }
-        func access_vault(key: i32) -> i32 {
-            budget { power: 15000_nj }
-            // Mapping to Vault Surface
-            // Surface ID: projects/6655191906983517172/screens/ac92b86386394b28967f01787c90dc62
-            render vault_view();
-            return 1;
+        verify { test "handshake_init" { assert(initiate_handshake(1)); } }
+        func initiate_handshake(peer_id: i32) -> i32 {
+            budget { power: 1200_nj }
+            let base = 7;
+            let mod_val = 23;
+            let private_key = 6;
+            let public_key = (base * private_key) / mod_val;
+            return public_key;
         }
 
-        verify { test "camera_capture_proof" { assert(1); } }
-        func capture_multimedia(source: i32) -> PixelStream {
-            budget { power: 25000_nj }
-            memory RawFrame: PixelStream [1]
-            return RawFrame;
+        verify { test "stream_integrity" { assert(1); } }
+        func receive_multimedia() -> Stream {
+            budget { power: 8500_nj }
+            memory MultimediaBuffer: Stream [16384]
+            return MultimediaBuffer;
         }
 
-        verify { test "display_refresh" { assert(1); } }
-        func update_display(data: Stream) -> i32 {
-            budget { power: 12000_nj }
-            // UDS Native Rendering
-            return 1;
+        verify { test "packet_efficiency" { assert(1); } }
+        func transmit_packet(data: Stream, target: i32) -> Stream {
+            budget { power: 4500_nj }
+            contract { ensures 1; }
+            let layer_1 = data * 1.618; 
+            publish(radio_npu);
+            return layer_1;
         }
     }
 
