@@ -1,0 +1,13 @@
+# JARVIS temporary and build artifacts
+target/
+*.log
+.jur/
+
+# Credentials and private keys (NEVER COMMIT)
+*.key
+.env
+.secrets/
+
+# OS-specific
+.DS_Store
+Thumbs.db
