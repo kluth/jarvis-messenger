@@ -6,10 +6,16 @@ complexity O(1)
             assert(configure_runtime(1));
         }
     }
+    
+    // Global Energy Budget for the Messenger Substrate
+    budget { power: 100000_nj }
+
     func configure_runtime(id: i32) -> i32 {
-        budget { power: 100000_nj }
-        publish(riscv);
-        publish(npu);
+        publish(riscv64);
+        publish(npu_universal);
+        publish(wait_free_scheduler);
+        publish(rcu_allocator);
+        
         return 1;
     }
 }
