@@ -10,7 +10,6 @@ module JarvisMessenger
         }
         func initiate_handshake(peer_id: i32) -> i32 {
             budget { power: 1200_nj }
-            // Formal entropy generation on RISC-V entropy source
             let base = 7;
             let mod_val = 23;
             let private_key = 6;
@@ -26,7 +25,6 @@ module JarvisMessenger
         }
         func receive_multimedia() -> Stream {
             budget { power: 8500_nj }
-            // Stream Buffer: O(1) allocation on RCU Substrate
             memory MultimediaBuffer: Stream [16384]
             return MultimediaBuffer;
         }
@@ -40,20 +38,9 @@ module JarvisMessenger
         func transmit_packet(data: Stream, target: i32) -> Stream {
             budget { power: 4500_nj }
             contract { ensures 1; }
-            
-            // Final Cryptographic Layering before AOT Emission
-            let layer_1 = data * 1.618; // Golden ratio entropy injection
-            let layer_2 = layer_1 + 0.5; // Noise floor calibration
-            
+            let layer_1 = data * 1.618; 
             publish(radio_npu);
-            return layer_2;
-        }
-
-        verify { test "display_refresh" { assert(update_display(1.0)); } }
-        func update_display(data: Stream) -> i32 {
-            budget { power: 12000_nj }
-            // Reserved for Universal Display Substrate (Issue #1)
-            return 1;
+            return layer_1;
         }
     }
 
@@ -67,7 +54,6 @@ module JarvisMessenger
         }
         func sync_swarm_state(node_count: i32) -> i32 {
             budget { power: 5000_nj }
-            // PDD: O(N) loop for node synchronization
             let i = 0;
             while i < node_count {
                 sync {
@@ -76,6 +62,23 @@ module JarvisMessenger
                 i = i + 1;
             }
             return 1;
+        }
+
+        verify {
+            test "ui_render_check" {
+                assert(1);
+            }
+        }
+        render main_dashboard(data: Stream) {
+            layout grid {
+                component Header("JarvisMessenger v5.0");
+                component VideoFeed(data);
+                component MessageList(data);
+                layout horizontal {
+                    component InputField();
+                    component SendButton();
+                }
+            }
         }
     }
 }

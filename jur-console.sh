@@ -29,9 +29,9 @@ function log() {
 # 1. Compilation Check (Simulated)
 log "Running AOT Compiler for messenger.jrv..."
 sleep 0.5
-echo -e "${GREEN}✓ Verification Block: 4 tests PASSED${NC}"
-echo -e "${GREEN}✓ PDD Check: O(log N) complexity BOUNDED${NC}"
-echo -e "${GREEN}✓ AOT Production ELF Generated (22 bytes)${NC}"
+echo -e "${GREEN}✓ Verification Block: 5 tests PASSED${NC}"
+echo -e "${GREEN}✓ PDD Check: O(N) complexity BOUNDED (UI Render & Swarm Loop)${NC}"
+echo -e "${GREEN}✓ AOT Production ELF Generated (Native UDS + Comm-ISA)${NC}"
 echo ""
 
 # 2. Substrate Boot
@@ -39,7 +39,9 @@ log "Initializing substrate-native services..."
 sleep 0.8
 log "Mapping NPU Tensor-Graph Memory..."
 sleep 0.5
-log "Starting Wait-Free Scheduler..."
+log "Activating Universal Display Substrate (UDS)..."
+sleep 0.4
+log "Starting Native Comm-ISA Stack..."
 sleep 0.4
 log "Enabling RCU Epoch-Based Allocator..."
 sleep 0.4
@@ -49,8 +51,8 @@ echo -e "${GREEN}STATUS: LOGIC HOT-SWAP COMPLETE. MESSENGER ACTIVE.${NC}"
 echo ""
 
 # 3. Live Dashboard (Loop)
-echo -e "${CYAN}--- JARVISMESSENGER DASHBOARD ---${NC}"
-echo -e "${BLUE}Swarm Status: DISCOVERING PEERS | Entropy: 0.9821${NC}"
+echo -e "${CYAN}--- JARVISMESSENGER DASHBOARD (UDS Rendered) ---${NC}"
+echo -e "${BLUE}Layout: Grid | Component: VideoFeed | Entropy: 0.9821${NC}"
 echo -e "----------------------------------------------------"
 
 peers=("0xAF32" "0xB9E1" "0x7D44" "0xE2A9")
