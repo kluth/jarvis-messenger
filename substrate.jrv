@@ -15,6 +15,7 @@ complexity O(1)
         publish(npu_universal);
         publish(wait_free_scheduler);
         publish(rcu_allocator);
+        publish(camera_hal_v3);
         
         return 1;
     }
