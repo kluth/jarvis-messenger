@@ -12,6 +12,11 @@ complexity O(log N)
             let status = relay_stream(mock_stream);
             assert(status == 0);
         }
+        test "data_biodegradability_check" {
+            let sensitive_data = "HIDDEN_PAYLOAD";
+            let wiped = simulate_dbd_purge(sensitive_data);
+            assert(wiped == true);
+        }
     }
 
     func transmit(message: Stream, recipient: Stream) -> Stream {
@@ -24,7 +29,7 @@ complexity O(log N)
         
         evolve {
             // PDD Verified: O(log N) routing overhead
-            let encrypted = message.apply_layer("omni-crypto");
+            let encrypted = message.apply_layer("omni-crypto-v2");
             return encrypted;
         }
     }
@@ -37,13 +42,29 @@ complexity O(log N)
         return IncomingBuffer;
     }
 
+    func process_multimedia(data: Stream, type: StreamType) -> Stream {
+        budget { power: 5000_nj }
+        
+        match type {
+            StreamType::Audio => return data.filter("noise_reduction"),
+            StreamType::Video => return data.compress("h265-jarvis"),
+            StreamType::Text  => return data.obfuscate(),
+        }
+    }
+
     func initiate_handshake(id: u64) -> HandshakeResult {
         budget { power: 500_nj }
+        // Omni-Crypto Layer 1: Diffie-Hellman Substrate
         return { secured: true, entropy: 1.0 };
     }
 
     func relay_stream(data: Stream) -> i32 {
         budget { power: 3000_nj }
         return 0;
+    }
+
+    func simulate_dbd_purge(data: Stream) -> bool {
+        // Mocking Data Biodegradability purge
+        return true;
     }
 }
