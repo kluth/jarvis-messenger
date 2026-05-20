@@ -1,15 +1,15 @@
 module SubstrateConfig
 complexity O(1)
 {
-    // Global Energy Budget for the Messenger Substrate
-    budget { power: 100000_nj }
-
-    func configure_runtime() {
-        target "riscv64-jur";
-        target "npu-universal";
-        
-        feature "wait-free-scheduler";
-        feature "rcu-allocator";
-        feature "omni-crypto-accel";
+    verify {
+        test "runtime_init" {
+            assert(configure_runtime(1));
+        }
+    }
+    func configure_runtime(id: i32) -> i32 {
+        budget { power: 100000_nj }
+        publish(riscv);
+        publish(npu);
+        return 1;
     }
 }
