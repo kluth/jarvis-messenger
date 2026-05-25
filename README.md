@@ -1,21 +1,37 @@
-# JarvisMessenger: The Universal Secure Substrate for Communication
+# JarvisMessenger
 
-![Scientific Assurance](https://img.shields.io/badge/JARVIS-Scientific_Assurance-blueviolet)
-![Decentralized](https://img.shields.io/badge/Architecture-Decentralized-blue)
-![Secure](https://img.shields.io/badge/Security-Omni--Cryptographic-green)
+[![JARVIS](https://img.shields.io/badge/JARVIS-Scientific_Assurance-blueviolet)](https://github.com/kluth/jarvis-messenger)
+[![Decentralized](https://img.shields.io/badge/Architecture-Decentralized-blue)](https://github.com/kluth/jarvis-messenger)
+[![Secure](https://img.shields.io/badge/Security-Omni--Cryptographic-green)](https://github.com/kluth/jarvis-messenger)
 
-JarvisMessenger is a standalone, decentralized communication protocol built on the JARVIS substrate. It bridges human interaction with mathematical certainty, ensuring that every message is fast, secure, and multimedial.
+> **A JARVIS-native, substrate-driven messaging system written in JRV and Shell.**  
+> Universal, secure, peer-to-peer communication substrate with autonomous routing.
 
-## 🚀 Key Features
-- **Decentralized Swarm**: No central servers. Peer discovery via the JARVIS Swarm Consensus.
-- **eTDD (Enforced TDD)**: Every protocol handshake is verified by mandatory `verify` blocks.
-- **PDD (Performance-Driven Development)**: $O(\log N)$ scalability for massive swarm synchronization.
-- **Multimedial Streams**: Native support for high-performance audio, video, and text via JARVIS `Stream` primitives.
-- **Data Biodegradability (DBD)**: Cryptographic wiping of messages the moment they lose scope.
+## 📁 Structure
 
-## 🛠 Project Structure
-- `messenger.jrv`: Core decentralized messaging logic.
-- `substrate.jrv`: Target-specific execution configurations.
-- `GEMINI.md`: Architectural laws and engineering standards.
+```
+jarvis-messenger/
+├── messenger.jrv        # Core messaging protocol & routing (JRV)
+├── substrate.jrv        # Communication substrate layer (JRV)
+├── jur-console.sh       # CLI console interface
+├── start-gui.sh         # GUI launcher
+└── GEMINI.md            # Development guidelines
+```
 
-**COMMUNICATION IS A MORAL IMPERATIVE.**
+## 🚀 Quick Start
+
+```bash
+# CLI mode
+./jur-console.sh
+
+# GUI mode
+./start-gui.sh
+```
+
+## 🔧 Protocol
+
+The messenger uses the JARVIS substrate for peer discovery, message routing, and cryptographic verification. Communication follows the **append-only delta model** — every message is cryptographically signed, timestamped, and appended to an immutable ledger.
+
+## 📄 License
+
+MIT
